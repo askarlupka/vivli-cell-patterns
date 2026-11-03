@@ -1,5 +1,7 @@
 # Vivli Platform Outcomes and Impact: Analysis Code and Data
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23901525.svg)](https://doi.org/10.5281/zenodo.23901525)
+
 This repository contains the analysis code and the underlying data used to
 produce the metrics and figures reported in:
 
