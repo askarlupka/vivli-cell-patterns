@@ -1,0 +1,57 @@
+metrics_year,pub_type_vivli,count,cum_types,cum_growth,.group
+2018,Journal Article,0,0,0,1
+2018,Abstract,0,0,0,1
+2018,Preprint,0,0,0,1
+2018,Letter,0,0,0,1
+2018,Review,0,0,0,1
+2018,Thesis/Dissertation,0,0,0,1
+2018,Repository,0,0,0,1
+2019,Journal Article,1,1,2,2
+2019,Abstract,1,1,2,2
+2019,Preprint,0,0,2,2
+2019,Letter,0,0,2,2
+2019,Review,0,0,2,2
+2019,Thesis/Dissertation,0,0,2,2
+2019,Repository,0,0,2,2
+2020,Journal Article,9,10,14,3
+2020,Abstract,3,4,14,3
+2020,Preprint,0,0,14,3
+2020,Letter,0,0,14,3
+2020,Review,0,0,14,3
+2020,Thesis/Dissertation,0,0,14,3
+2020,Repository,0,0,14,3
+2021,Journal Article,29,39,61,4
+2021,Abstract,16,20,61,4
+2021,Preprint,0,0,61,4
+2021,Letter,1,1,61,4
+2021,Review,1,1,61,4
+2021,Thesis/Dissertation,0,0,61,4
+2021,Repository,0,0,61,4
+2022,Journal Article,58,97,150,5
+2022,Abstract,25,45,150,5
+2022,Preprint,2,2,150,5
+2022,Letter,3,4,150,5
+2022,Review,1,2,150,5
+2022,Thesis/Dissertation,0,0,150,5
+2022,Repository,0,0,150,5
+2023,Journal Article,59,156,270,6
+2023,Abstract,52,97,270,6
+2023,Preprint,6,8,270,6
+2023,Letter,2,6,270,6
+2023,Review,0,2,270,6
+2023,Thesis/Dissertation,1,1,270,6
+2023,Repository,0,0,270,6
+2024,Journal Article,83,239,407,7
+2024,Abstract,43,140,407,7
+2024,Preprint,7,15,407,7
+2024,Letter,1,7,407,7
+2024,Review,1,3,407,7
+2024,Thesis/Dissertation,1,2,407,7
+2024,Repository,1,1,407,7
+2025,Journal Article,86,325,532,8
+2025,Abstract,28,168,532,8
+2025,Preprint,4,19,532,8
+2025,Letter,3,10,532,8
+2025,Review,2,5,532,8
+2025,Thesis/Dissertation,2,4,532,8
+2025,Repository,0,1,532,8

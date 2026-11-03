@@ -1,0 +1,133 @@
+Country,iso3,World Bank classification (FY2027),LMIC,studies
+United States,USA,High income,No,3505
+Germany,DEU,High income,No,1737
+Canada,CAN,High income,No,1453
+United Kingdom,GBR,High income,No,1397
+Spain,ESP,High income,No,1336
+France,FRA,High income,No,1203
+Poland,POL,High income,No,1089
+Italy,ITA,High income,No,1084
+Belgium,BEL,High income,No,1006
+Russia,RUS,High income,No,998
+Australia,AUS,High income,No,958
+Japan,JPN,High income,No,853
+Czechia,CZE,High income,No,839
+Netherlands,NLD,High income,No,824
+South Korea,KOR,High income,No,790
+Hungary,HUN,High income,No,759
+Mexico,MEX,Upper middle income,Yes,731
+Argentina,ARG,Upper middle income,Yes,659
+Sweden,SWE,High income,No,645
+Taiwan,TWN,Not classified (World Bank),No,600
+Brazil,BRA,Upper middle income,Yes,581
+Austria,AUT,High income,No,563
+Romania,ROU,High income,No,547
+South Africa,ZAF,Upper middle income,Yes,516
+Denmark,DNK,High income,No,490
+Ukraine,UKR,Upper middle income,Yes,490
+Israel,ISR,High income,No,479
+China,CHN,Upper middle income,Yes,433
+Slovakia,SVK,High income,No,425
+Bulgaria,BGR,High income,No,421
+India,IND,Lower middle income,Yes,410
+Greece,GRC,High income,No,408
+Finland,FIN,High income,No,404
+Turkey,TUR,Upper middle income,Yes,386
+Switzerland,CHE,High income,No,342
+Chile,CHL,High income,No,327
+Puerto Rico,PRI,High income,No,327
+Portugal,PRT,High income,No,314
+Norway,NOR,High income,No,303
+Thailand,THA,Upper middle income,Yes,291
+New Zealand,NZL,High income,No,282
+Estonia,EST,High income,No,266
+Colombia,COL,Upper middle income,Yes,241
+Philippines,PHL,Upper middle income,Yes,240
+Hong Kong SAR China,HKG,High income,No,230
+Peru,PER,Upper middle income,Yes,230
+Latvia,LVA,High income,No,221
+Lithuania,LTU,High income,No,220
+Malaysia,MYS,Upper middle income,Yes,215
+Ireland,IRL,High income,No,206
+Serbia,SRB,Upper middle income,Yes,197
+Croatia,HRV,High income,No,194
+Singapore,SGP,High income,No,193
+Guatemala,GTM,Upper middle income,Yes,84
+Slovenia,SVN,High income,No,80
+Panama,PAN,High income,No,58
+Lebanon,LBN,Lower middle income,Yes,57
+Egypt,EGY,Lower middle income,Yes,55
+Vietnam,VNM,Upper middle income,Yes,52
+Bosnia & Herzegovina,BIH,Upper middle income,Yes,46
+Georgia,GEO,Upper middle income,Yes,46
+Belarus,BLR,Upper middle income,Yes,40
+Saudi Arabia,SAU,High income,No,36
+Costa Rica,CRI,High income,No,34
+Kenya,KEN,Lower middle income,Yes,34
+Pakistan,PAK,Lower middle income,Yes,28
+Iceland,ISL,High income,No,27
+Tunisia,TUN,Lower middle income,Yes,26
+Dominican Republic,DOM,Upper middle income,Yes,22
+Moldova,MDA,Upper middle income,Yes,19
+Tanzania,TZA,Lower middle income,Yes,19
+Venezuela,VEN,Lower middle income,Yes,18
+United Arab Emirates,ARE,High income,No,16
+Indonesia,IDN,Upper middle income,Yes,16
+Jordan,JOR,Upper middle income,Yes,15
+North Macedonia,MKD,Upper middle income,Yes,15
+Algeria,DZA,Upper middle income,Yes,13
+Bangladesh,BGD,Lower middle income,Yes,11
+Ghana,GHA,Lower middle income,Yes,11
+Malawi,MWI,Low income,Yes,11
+Uganda,UGA,Low income,Yes,11
+Ecuador,ECU,Upper middle income,Yes,10
+Mali,MLI,Low income,Yes,10
+Burkina Faso,BFA,Low income,Yes,9
+Honduras,HND,Lower middle income,Yes,9
+Luxembourg,LUX,High income,No,9
+Congo - Kinshasa,COD,Low income,Yes,8
+Morocco,MAR,Lower middle income,Yes,8
+Nigeria,NGA,Lower middle income,Yes,8
+Uruguay,URY,High income,No,8
+Zambia,ZMB,Lower middle income,Yes,8
+Kuwait,KWT,High income,No,7
+Mozambique,MOZ,Low income,Yes,7
+El Salvador,SLV,Upper middle income,Yes,7
+Cyprus,CYP,High income,No,6
+Ethiopia,ETH,Low income,Yes,6
+Gambia,GMB,Low income,Yes,6
+Gabon,GAB,Upper middle income,Yes,5
+Kazakhstan,KAZ,Upper middle income,Yes,5
+Monaco,MCO,High income,No,5
+Paraguay,PRY,Upper middle income,Yes,5
+Qatar,QAT,High income,No,5
+Sudan,SDN,Low income,Yes,5
+Senegal,SEN,Lower middle income,Yes,5
+Benin,BEN,Lower middle income,Yes,4
+Sri Lanka,LKA,Upper middle income,Yes,4
+Malta,MLT,High income,No,4
+Bahamas,BHS,High income,No,3
+Equatorial Guinea,GNQ,Upper middle income,Yes,3
+Rwanda,RWA,Low income,Yes,3
+Albania,ALB,Upper middle income,Yes,2
+Armenia,ARM,Upper middle income,Yes,2
+Botswana,BWA,Upper middle income,Yes,2
+Congo - Brazzaville,COG,Lower middle income,Yes,2
+Nicaragua,NIC,Lower middle income,Yes,2
+Nepal,NPL,Lower middle income,Yes,2
+Oman,OMN,High income,No,2
+Belize,BLZ,Upper middle income,Yes,1
+Central African Republic,CAF,Low income,Yes,1
+Cameroon,CMR,Lower middle income,Yes,1
+Cuba,CUB,Upper middle income,Yes,1
+Guinea,GIN,Lower middle income,Yes,1
+Guadeloupe,GLP,Not classified (World Bank),No,1
+Iraq,IRQ,Upper middle income,Yes,1
+Jamaica,JAM,Upper middle income,Yes,1
+Cambodia,KHM,Lower middle income,Yes,1
+Montenegro,MNE,Upper middle income,Yes,1
+Papua New Guinea,PNG,Lower middle income,Yes,1
+Réunion,REU,Not classified (World Bank),No,1
+Sierra Leone,SLE,Low income,Yes,1
+U.S. Virgin Islands,VIR,High income,No,1
+Zimbabwe,ZWE,Lower middle income,Yes,1

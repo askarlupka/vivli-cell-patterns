@@ -1,0 +1,447 @@
+
+
+```{r setup, include=FALSE, echo=FALSE}
+# Send knitr's per-chunk plot files to a temporary directory so knitting never
+# creates a `figure/` folder in the project tree. The figures committed to the
+# repo are written separately by the explicit ggsave2() calls into figures/.
+knitr::opts_chunk$set(echo = FALSE,
+                      fig.path = file.path(tempdir(), "knitr-fig/"))
+
+library(tidyverse)
+library(patchwork)
+library(lubridate)
+library(dplyr)
+library(cowplot)
+
+my_theme <- theme_bw(base_size = 19) +
+  theme(
+    panel.background  = element_rect(fill = 'transparent', colour = NA),
+    plot.background   = element_rect(fill = 'transparent', colour = NA),
+    legend.background = element_rect(fill = 'transparent'),
+    legend.box.background = element_rect(fill = 'transparent'),
+    legend.position   = "none"
+  )
+
+label_size <- 6   # for geom_text() (ggplot's geom size ~= mm, not pt)
+
+source(here::here('code/source_scripts/01_functions.R'))
+
+```
+
+```{r data, echo = FALSE}
+requests <- request_data()
+
+requests_n <- length(unique(requests$vivli_id))
+countries_n <- length(unique(requests$lead_researcher_country))
+
+
+# Total number of approved data requests
+print(paste("Total number of data requests : ", requests_n))
+
+# Number of unique lead-researcher countries
+print(paste("Unique lead-researcher countries : ", countries_n))
+
+
+```
+
+Disclosure Data
+
+```{r}
+
+disclosures <- disclosure_data('data/public_disclosures.rds')
+
+
+
+disclosures_n <- nrow(disclosures)
+
+# Total number of approved publications
+print(paste("Total number of publications : ", disclosures_n))
+
+# Total number of journal articles
+print(paste("Total number of journal articles : ", nrow(disclosures[disclosures$pub_type_vivli == "Journal Article", ])))
+
+
+```
+
+Study data
+
+```{r}
+
+study_data <- readRDS(here::here(file = "data/studies.rds" ))
+
+
+#Number of posted clinical trials on or before December 31, 2025. Does not match posted metrics as the report was accesssed on September 14, 2026.
+#Number of unique studies
+print(paste("Total number of studies posted on or before December 31, 2025: ", nrow(study_data)))
+
+#Number of unique countries in the studies
+print(paste("Total number of unique countries across the studies: ", dplyr::n_distinct(unlist(strsplit(study_data$site_countries, "; ")), na.rm = TRUE)))
+
+#Number of studies with and without site-country data
+print(paste("Studies with site-country data: ", sum(study_data$n_site_countries > 0)))
+print(paste("Studies without site-country data: ", sum(study_data$n_site_countries == 0)))
+```
+
+Add in the number of disclosures to the data requests
+
+```{r}
+publications_per_request <- disclosures %>%
+  dplyr::select(vivli_id, public_disclosure) %>%
+  dplyr::summarise(.by = vivli_id,
+                   public_disclosure_n = n())
+
+requests <- requests %>%
+  dplyr::left_join(publications_per_request,
+                   by = "vivli_id")
+```
+
+
+#Data Request Figures:
+
+## Increasing number of DR
+
+```{r slide2}
+
+my_pal <- scales::seq_gradient_pal(low = "#00affa", high = "#004f71", space = "Lab")
+
+colors <- my_pal(seq(0,1, length.out = length(unique(requests$approved_year))))
+p1 <- requests %>%
+  select(vivli_id, approved_year) %>%
+  summarize(count = n(), .by = approved_year) %>%
+    dplyr::mutate(approved_year = factor(year(approved_year), levels = c("2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"))) %>%
+  arrange(approved_year) %>%
+  mutate(cum_growth = cumsum(count)) %>%
+  ggplot(aes(x = approved_year, y = cum_growth, fill = approved_year)) +
+  geom_col() +
+  geom_text(aes(y = cum_growth+30, label = cum_growth), size = label_size) +
+ # labs(title = "Cumulative Number of Approved Data Requests Since Dec-2018",
+ #      subtitle = paste0("(", requests_n, " total approved requests from Dec-2018 to Dec-2025)")) +
+  xlab("Year") +
+  ylab("Data Requests (n)") +
+  my_theme +
+  scale_fill_manual(values = colors)
+
+
+  p1
+```
+
+## Cumulative publications by type
+
+```{r slide4}
+
+# Colorblind-safe categorical palette for the publication types (panel E legend)
+pub_levels <- c("Journal Article", "Abstract", "Preprint", "Letter",
+                "Review", "Thesis/Dissertation", "Repository")
+pub_colors <- c("Journal Article" = "#0072B2", "Abstract" = "#E69F00",
+                "Preprint" = "#009E73", "Letter" = "#CC79A7",
+                "Review" = "#56B4E9", "Thesis/Dissertation" = "#D55E00",
+                "Repository" = "#F0E442")
+
+p3 <- disclosures %>%
+  select(public_disclosure, metrics_year, pub_type_vivli) %>%
+  dplyr::filter(!is.na(pub_type_vivli)) %>%
+  dplyr::mutate(metrics_year = factor(metrics_year, levels = c(2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025)),
+                pub_type_vivli = factor(pub_type_vivli, levels = pub_levels)) %>%
+  summarize(count = n(), .by = c(metrics_year, pub_type_vivli)) %>%
+  # Fill every year x publication-type combination with 0 so each type's
+  # cumulative carries forward across years with no new publications. This
+  # keeps Repository (1 in 2024, 0 in 2025) visible as a cumulative 1 in 2025,
+  # and makes the per-year total (cum_growth) the true cumulative every year.
+  tidyr::complete(metrics_year, pub_type_vivli, fill = list(count = 0)) %>%
+  arrange(metrics_year) %>%
+  group_by(pub_type_vivli) %>%
+  mutate(cum_types = cumsum(count)) %>%
+  group_by(metrics_year) %>%
+  mutate(cum_growth = sum(cum_types)) %>%
+  ggplot(aes(x = metrics_year, y = cum_types, fill = pub_type_vivli)) +
+  geom_col() +
+  geom_text(aes(y = cum_growth+20, label = cum_growth), size = label_size) +
+  scale_fill_manual(values = pub_colors, drop = FALSE, name = "Publication type") +
+  xlab("Year") +
+  ylab("Publications (n)") +
+  my_theme +
+  theme(legend.position = "bottom",
+        legend.title = element_text(size = 13),
+        legend.text  = element_text(size = 12),
+        legend.key.size = unit(0.4, "cm")) +
+  guides(size = "none", fill = guide_legend(nrow = 3))
+
+p3
+```
+
+#### Outcomes
+
+```{r}
+journal_articles_n <- nrow(subset(disclosures, pub_type_vivli == "Journal Article"))
+
+my_pal <- scales::seq_gradient_pal(high = "#00affa", low = "#004f71", space = "Lab")
+
+colors <- my_pal(seq(0,1, length.out = 8))
+
+
+p4 <- disclosures %>%
+  dplyr::filter(pub_type_vivli == "Journal Article") %>%
+  dplyr::select(public_disclosure, outcome_category) %>%
+  tidyr::separate_longer_delim(outcome_category, delim = ",") %>%
+  dplyr::mutate(outcome_category = ifelse(outcome_category == "Supporting Future Research", "Informing patient-care decisions", outcome_category),
+                outcome_category = ifelse(outcome_category == "Algorithm/Code", "Algorithm or Code", outcome_category)) %>%
+  dplyr::distinct() %>%
+  dplyr::summarise(.by = outcome_category,
+                   count = n()) %>%
+  ggplot(aes(x = reorder(outcome_category, count), y = count,
+             fill = reorder(outcome_category, count))) +
+  geom_col() +
+  geom_text(aes(label = count), hjust = -0.2, size = label_size) +
+  coord_flip(clip = "off") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.12))) +
+  xlab("Outcome category") +
+  ylab("Journal articles (n)") +
+  guides(fill = "none") +
+  scale_fill_manual(values = colors) +
+  my_theme
+
+  p4
+
+# Percentage of journal articles informing patient-care decisions (matches Figure 2D / panel F,
+# which rolls "Supporting Future Research" into "Informing patient-care decisions")
+patient_care_n <- disclosures %>%
+  dplyr::filter(pub_type_vivli == "Journal Article") %>%
+  dplyr::select(public_disclosure, outcome_category) %>%
+  tidyr::separate_longer_delim(outcome_category, delim = ",") %>%
+  dplyr::mutate(outcome_category = ifelse(outcome_category == "Supporting Future Research", "Informing patient-care decisions", outcome_category)) %>%
+  dplyr::distinct() %>%
+  dplyr::filter(outcome_category == "Informing patient-care decisions") %>%
+  nrow()
+print(paste0("Journal articles informing patient-care decisions: ", patient_care_n, " of ", journal_articles_n, " (", round(100 * patient_care_n / journal_articles_n), "%)"))
+```
+
+Combined manuscript figure
+
+```{r}
+gradient_blue <- function(n) scales::seq_gradient_pal(low = "#00affa", high = "#004f71",
+                                                     space = "Lab")(seq(0, 1, length.out = n))
+
+# Panel C: trials per data request by approval year (side-by-side bars)
+trials_tab <- requests %>%
+  dplyr::filter(!is.na(studies_n)) %>%
+  dplyr::mutate(trial_bin = dplyr::case_when(
+    studies_n == 1 ~ "1", studies_n == 2 ~ "2", studies_n == 3 ~ "3",
+    studies_n == 4 ~ "4", studies_n == 5 ~ "5", TRUE ~ "6+"),
+    trial_bin = factor(trial_bin, levels = c("1", "2", "3", "4", "5", "6+")),
+    year = factor(lubridate::year(approved_year))) %>%
+  dplyr::count(year, trial_bin)
+pC <- ggplot(trials_tab, aes(x = year, y = n, fill = trial_bin)) +
+  geom_col(position = position_dodge2(preserve = "single")) +
+  scale_fill_manual(values = gradient_blue(6), name = "Trials per request") +
+  xlab("Year approved") +
+  ylab("Data requests (n)") +
+  my_theme +
+  theme(legend.position = "bottom", legend.title = element_text(size = 14),
+        legend.text = element_text(size = 13), legend.key.size = unit(0.5, "cm")) +
+  guides(fill = guide_legend(nrow = 1, title.position = "top", title.hjust = 0.5))
+
+# Panel D: data contributors per data request by approval year (side-by-side bars)
+contrib_tab <- requests %>%
+  dplyr::mutate(contrib_bin = dplyr::case_when(
+    data_contributor_n == 1 ~ "1", data_contributor_n == 2 ~ "2",
+    data_contributor_n == 3 ~ "3", data_contributor_n == 4 ~ "4",
+    TRUE ~ "5+"),
+    contrib_bin = factor(contrib_bin, levels = c("1", "2", "3", "4", "5+")),
+    year = factor(lubridate::year(approved_year))) %>%
+  dplyr::count(year, contrib_bin)
+pD <- ggplot(contrib_tab, aes(x = year, y = n, fill = contrib_bin)) +
+  geom_col(position = position_dodge2(preserve = "single")) +
+  scale_fill_manual(values = gradient_blue(5), name = "Contributors per request") +
+  xlab("Year approved") +
+  ylab("Data requests (n)") +
+  my_theme +
+  theme(legend.position = "bottom", legend.title = element_text(size = 14),
+        legend.text = element_text(size = 13), legend.key.size = unit(0.5, "cm")) +
+  guides(fill = guide_legend(nrow = 1, title.position = "top", title.hjust = 0.5))
+
+# Panel F: distribution of approved data requests by therapeutic area (from
+# requests.rds, the tracked approved-request population). One therapeutic area
+# per request; blank and literal "N/A" collapse into "Unclassified".
+collapse_ta_req <- function(x) {
+  x <- trimws(x)
+  ifelse(is.na(x) | x == "" | x == "N/A", "Unclassified", x)
+}
+# Full, unlumped table: written to the panel-F data CSV (every therapeutic area).
+ta_req_tab <- requests %>%
+  dplyr::mutate(therapeutic_area = collapse_ta_req(therapeutic_area)) %>%
+  dplyr::summarise(.by = therapeutic_area, count = dplyr::n()) %>%
+  dplyr::arrange(dplyr::desc(count))
+
+# Figure version only: show the 10 largest therapeutic areas and roll the rest
+# into a single "Other" bar. "Other" is pinned to the bottom of the plot.
+ta_top <- dplyr::slice_max(ta_req_tab, count, n = 10, with_ties = FALSE)
+ta_req_plot <- dplyr::bind_rows(
+  ta_top,
+  tibble::tibble(therapeutic_area = "Other",
+                 count = sum(ta_req_tab$count) - sum(ta_top$count))) %>%
+  dplyr::mutate(therapeutic_area = factor(therapeutic_area,
+                                          levels = c("Other", rev(ta_top$therapeutic_area))))
+pF <- ggplot(ta_req_plot, aes(x = therapeutic_area, y = count, fill = therapeutic_area)) +
+  geom_col() +
+  geom_text(aes(label = count), hjust = -0.2, size = label_size - 1) +
+  coord_flip(clip = "off") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.12))) +
+  xlab("Therapeutic area") +
+  ylab("Data requests (n)") +
+  guides(fill = "none") +
+  scale_fill_manual(values = gradient_blue(nrow(ta_req_plot))) +
+  my_theme +
+  theme(axis.text.y = element_text(size = 13))
+
+# Six-panel layout:
+#   A requests by year          B requests by therapeutic area
+#   C trials per request        D contributors per request
+#   E cumulative publications   F outcome categories
+combined <- cowplot::plot_grid(p1, pF, pC, pD, p3, p4,
+                   labels = LETTERS[1:6],
+                   ncol = 2,
+                   scale = 0.95,
+                   align = "hv")
+ggsave2(plot = combined,
+                   filename = here::here("figures/manuscript_figure.tiff"),
+        scale =3,
+        width = 8.5,
+        height= 8,
+        bg='transparent')
+
+
+ggsave2(plot = combined,
+                   filename = here::here("figures/manuscript_figure.png"),
+        scale =2,
+        width = 8.5,
+        height= 8,
+        bg='transparent')
+
+# Save each panel's underlying data alongside manuscript_figure.png (A-F match the
+# panels). Panel B keeps the full, unlumped therapeutic-area table (all areas),
+# even though the figure shows only the top 10 plus a combined "Other" bar.
+readr::write_csv(p1$data, here::here("figures/manuscript_figure_A_data.csv"))
+readr::write_csv(ta_req_tab, here::here("figures/manuscript_figure_B_data.csv"))
+readr::write_csv(pC$data, here::here("figures/manuscript_figure_C_data.csv"))
+readr::write_csv(pD$data, here::here("figures/manuscript_figure_D_data.csv"))
+readr::write_csv(p3$data, here::here("figures/manuscript_figure_E_data.csv"))
+readr::write_csv(p4$data, here::here("figures/manuscript_figure_F_data.csv"))
+
+```
+
+## Studies and participants by therapeutic area
+
+```{r study_therapeutic_area}
+# One therapeutic area per study; combine blank and literal "N/A" into "Unclassified".
+collapse_ta <- function(x) {
+  x <- trimws(x)
+  ifelse(is.na(x) | x == "" | x == "N/A", "Unclassified", x)
+}
+
+ta_summary <- study_data %>%
+  dplyr::mutate(therapeutic_area = collapse_ta(`Therapeutic Areas`),
+                participants = suppressWarnings(as.numeric(`# Participants`))) %>%
+  dplyr::summarise(.by = therapeutic_area,
+                   studies = dplyr::n(),
+                   participants = sum(participants, na.rm = TRUE)) %>%
+  dplyr::arrange(dplyr::desc(studies))
+
+# Underlying data keeps every therapeutic area (no cutoff)
+readr::write_csv(ta_summary, here::here("figures/study_therapeutic_area_data.csv"))
+
+# The figure shows only therapeutic areas with at least 100 studies; all panels
+# share the therapeutic-area order set by study count
+ta_plot <- ta_summary %>%
+  dplyr::filter(studies >= 100) %>%
+  dplyr::mutate(therapeutic_area = factor(therapeutic_area, levels = rev(therapeutic_area)))
+
+n_ta <- nrow(ta_plot)
+
+# One horizontal-bar panel per metric, all sharing the study-count ordering
+ta_panel <- function(yvar, ylab, show_axis, expand_r = 0.15) {
+  p <- ggplot(ta_plot, aes(x = therapeutic_area, y = .data[[yvar]], fill = therapeutic_area)) +
+    geom_col() +
+    geom_text(aes(label = scales::comma(.data[[yvar]])), hjust = -0.15, size = label_size - 1) +
+    coord_flip(clip = "off") +
+    scale_y_continuous(expand = expansion(mult = c(0, expand_r)), labels = scales::comma) +
+    scale_fill_manual(values = gradient_blue(n_ta)) +
+    xlab(if (show_axis) "Therapeutic area" else NULL) + ylab(ylab) +
+    my_theme +
+    theme(plot.margin = margin(t = 16, r = 6, b = 3, l = 3))
+  if (!show_axis) p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+  p
+}
+
+# A studies   B participants (shared therapeutic-area order)
+pA_study <- ta_panel("studies", "Studies (n)", TRUE, expand_r = 0.20)
+pB_study <- ta_panel("participants", "Participants (n)", FALSE, expand_r = 0.30)
+
+study_figure <- cowplot::plot_grid(pA_study, pB_study, labels = c("A", "B"),
+                                    ncol = 2, rel_widths = c(1.83, 1), align = "h",
+                                    label_y = 1, vjust = 1)
+
+ggsave2(plot = study_figure,
+        filename = here::here("figures/study_therapeutic_area.tiff"),
+        scale = 1.3, width = 11, height = 6, bg = "transparent")
+ggsave2(plot = study_figure,
+        filename = here::here("figures/study_therapeutic_area.png"),
+        scale = 1.1, width = 11, height = 6, bg = "transparent")
+
+study_figure
+```
+
+## Public disclosures cited in policy documents
+
+Policy citations are drawn from the Overton index of Vivli publications
+(`data/Overton_index articles-2026-02-10.csv`). The full article-to-policy-document
+detail is provided for reference as Supplemental Table 3
+(`figures/Supplemental_Table_3_policy_citations.csv`).
+
+```{r policy_citations}
+# Policy citations come from the Overton index; match its article DOIs to our
+# public disclosures so the table counts only disclosures included in this deposit.
+overton <- readr::read_csv(here::here("data/Overton_index articles-2026-02-10.csv"),
+                           show_col_types = FALSE)
+
+norm_doi <- function(x) tolower(trimws(x))
+disclosure_dois <- unique(norm_doi(disclosures$doi[!is.na(disclosures$doi) & disclosures$doi != ""]))
+
+# One Overton row = one (article, policy document) citing pair
+overton_matched <- overton %>%
+  dplyr::mutate(doi = norm_doi(DOI)) %>%
+  dplyr::filter(doi %in% disclosure_dois)
+
+policy_citation_table <- tibble::tibble(
+  Metric = c("Public disclosures cited in >=1 policy document",
+             "Policy documents citing a public disclosure",
+             "Total public disclosure to policy document citations"),
+  Count  = c(dplyr::n_distinct(overton_matched$doi),
+             dplyr::n_distinct(overton_matched$`Document page`),
+             nrow(overton_matched)))
+
+readr::write_csv(policy_citation_table, here::here("figures/policy_citation_table.csv"))
+knitr::kable(policy_citation_table)
+
+# Supplemental Table 3: the Overton policy-citation index for Vivli publications,
+# cleaned for reference (HTML tags stripped, article date parsed, working/ID and
+# duplicate URL columns dropped). Readers are referred to this table for the full
+# article-to-policy-document detail behind the counts above.
+strip_html <- function(x) trimws(gsub("<[^>]+>", "", x))
+supplemental_table_3 <- overton %>%
+  dplyr::transmute(
+    `Article title`        = strip_html(Title),
+    Journal                = Journal,
+    DOI                    = DOI,
+    `Article published`    = as.Date(`Published on`),
+    `Policy organization`  = strip_html(`Cited by source`),
+    `Policy document`      = strip_html(`Cited by title`),
+    `Policy document date` = `Cited by date`,
+    `Organization sector`  = `Cited by organisation sector`,
+    `Organization type`    = `Cited by organisation type`,
+    Country                = `Cited by country`,
+    `Policy document URL`  = `Cited by URL`) %>%
+  dplyr::arrange(`Article title`, `Policy organization`, `Policy document`)
+
+readr::write_csv(supplemental_table_3,
+                 here::here("figures/Supplemental_Table_3_policy_citations.csv"))
+```

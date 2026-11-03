@@ -1,0 +1,35 @@
+{
+  "title": "Vivli Platform Outcomes and Impact: Analysis Code and Data",
+  "upload_type": "software",
+  "description": "Analysis code and underlying data used to produce the metrics and figures reported in the Vivli platform paper (Patterns, Cell Press, 2026), covering approved data access requests and resulting public disclosures from December 2018 through December 2025. The manuscript figure is fully reproducible from the included derived datasets. NOTE: this is the analysis and metrics code, not the Vivli platform production source code.",
+  "license": "GPL-3.0-or-later",
+  "access_right": "open",
+  "keywords": [
+    "clinical trial data sharing",
+    "data reuse",
+    "research impact",
+    "bibliometrics",
+    "open data",
+    "Vivli"
+  ],
+  "creators": [
+    { "name": "Li, Rebecca", "affiliation": "Vivli; Center for Bioethics, Harvard Medical School" },
+    { "name": "Skarlupka, Amanda L.", "affiliation": "Vivli" },
+    { "name": "O'Callaghan, Jennifer", "affiliation": "Vivli Europe" },
+    { "name": "Peloquin, David", "affiliation": "Ropes & Gray LLP" },
+    { "name": "McAllister, David A.", "affiliation": "University of Glasgow" },
+    { "name": "Graham, Elizabeth", "affiliation": "Vivli" },
+    { "name": "Levenstein, Marcia", "affiliation": "Vivli" },
+    { "name": "Wood, Julie", "affiliation": "Vivli" },
+    { "name": "Conklin, Robert", "affiliation": "Vivli" },
+    { "name": "Sim, Ida", "affiliation": "Vivli; University of California San Francisco" }
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "TODO-add-article-DOI-when-available",
+      "resource_type": "publication-article"
+    }
+  ],
+  "notes": "TODO before release: add ORCID iDs to creators, add the article DOI in related_identifiers, and confirm the license SPDX id (use GPL-3.0-only if version 3 exactly is intended)."
+}

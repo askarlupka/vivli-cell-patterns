@@ -1,0 +1,41 @@
+# ---------------------------------------------------------------------------
+# R session and workspace artifacts. These can contain copies of loaded data
+# and must never be committed to a public repository.
+# ---------------------------------------------------------------------------
+.RData
+.RDataTmp
+.Rhistory
+.Rapp.history
+.Rproj.user/
+.Ruserdata/
+
+# ---------------------------------------------------------------------------
+# renv: the lockfile (renv.lock) IS committed; the installed library is not.
+# ---------------------------------------------------------------------------
+renv/library/
+renv/staging/
+renv/python/
+renv/sandbox/
+
+# ---------------------------------------------------------------------------
+# Regenerable analysis outputs. The source .Rmd/.R files are committed; the
+# rendered reports and large image exports are rebuilt by running the code.
+# The reference figures/manuscript_figure.png is committed on purpose.
+# ---------------------------------------------------------------------------
+*.tiff
+*.html
+code/**/*.html
+Rplots.pdf
+
+# knitr writes chunk plots here by default when knitting the .Rmd
+figure/
+code/**/figure/
+
+# ---------------------------------------------------------------------------
+# Operating system and editor files
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+*~
+*.swp

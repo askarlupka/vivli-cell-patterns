@@ -1,0 +1,80 @@
+cff-version: 1.2.0
+message: "If you use this software or data, please cite both the article and this archived repository."
+title: "Vivli Platform Outcomes and Impact: Analysis Code and Data"
+abstract: >-
+  Analysis code and underlying data used to produce the metrics and figures
+  reported in the Vivli platform paper, covering approved data access requests
+  and resulting public disclosures from December 2018 through December 2025.
+type: software
+version: 1.0.0
+date-released: 2026-09-10
+license: GPL-3.0-or-later
+repository-code: "https://github.com/askarlupka/vivli-cell-patterns"
+keywords:
+  - clinical trial data sharing
+  - data reuse
+  - research impact
+  - bibliometrics
+  - open data
+# TODO before release: confirm this is the intended list of software/data
+# authors (it currently mirrors the article author list) and add ORCID iDs
+# with lines of the form:  orcid: "https://orcid.org/0000-0000-0000-0000"
+authors:
+  - family-names: Li
+    given-names: Rebecca
+    affiliation: "Vivli, Cambridge, Massachusetts, USA; Center for Bioethics, Harvard Medical School, Boston, Massachusetts, USA"
+  - family-names: Skarlupka
+    given-names: Amanda L.
+    affiliation: "Vivli, Cambridge, Massachusetts, USA"
+  - family-names: O'Callaghan
+    given-names: Jennifer
+    affiliation: "Vivli Europe, Netherlands"
+  - family-names: Peloquin
+    given-names: David
+    affiliation: "Ropes & Gray LLP, Boston, Massachusetts, USA"
+  - family-names: McAllister
+    given-names: David A.
+    affiliation: "School of Health and Wellbeing, University of Glasgow, Glasgow, UK"
+  - family-names: Graham
+    given-names: Elizabeth
+    affiliation: "Vivli, Cambridge, Massachusetts, USA"
+  - family-names: Levenstein
+    given-names: Marcia
+    affiliation: "Vivli, Cambridge, Massachusetts, USA"
+  - family-names: Wood
+    given-names: Julie
+    affiliation: "Vivli, Cambridge, Massachusetts, USA"
+  - family-names: Conklin
+    given-names: Robert
+    affiliation: "Vivli, Cambridge, Massachusetts, USA"
+  - family-names: Sim
+    given-names: Ida
+    affiliation: "Vivli, Cambridge, Massachusetts, USA; Division of General Internal Medicine, University of California San Francisco, San Francisco, California, USA"
+preferred-citation:
+  type: article
+  title: "The Vivli Platform: A Global Clinical Research Data Sharing Platform"
+  journal: "Patterns"
+  year: 2026
+  # TODO before release: add the article DOI once assigned.
+  doi: "TODO-add-article-DOI"
+  authors:
+    - family-names: Li
+      given-names: Rebecca
+    - family-names: Skarlupka
+      given-names: Amanda L.
+    - family-names: O'Callaghan
+      given-names: Jennifer
+    - family-names: Peloquin
+      given-names: David
+    - family-names: McAllister
+      given-names: David A.
+    - family-names: Graham
+      given-names: Elizabeth
+    - family-names: Levenstein
+      given-names: Marcia
+    - family-names: Wood
+      given-names: Julie
+    - family-names: Conklin
+      given-names: Robert
+    - family-names: Sim
+      given-names: Ida

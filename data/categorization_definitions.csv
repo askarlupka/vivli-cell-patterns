@@ -1,0 +1,38 @@
+Outcome category,Detailed outcome,Definition
+Algorithm/Code,AiAlgorithm,Development of an AI algorithm for any usage
+Algorithm/Code,AlgorithmCode,Aiming to provide the code for broader community use
+Algorithm/Code,AlgorithmForPredictingTreatmentResponse,"Software specifically for the prediction of treatment response, can be AI/ML"
+Algorithm/Code,Code,Code for community use
+Algorithm/Code,MachineLearning,Development of a machine learning algorithm for any usage including analysis and prediction
+Clinical guidelines,ClinicalGuidelines,Strong support to change or retain clinical guidelines
+Data Sharing,DataSharingMetrics,Outcome related to measuring data sharing or its impacts
+Data Sharing,DataSharingRisk,Anything related to the risk or lack of risk from sharing data
+Data Sharing,DataSharing,Analysis into the ease/ability/access to data or for the harmonization and utility of combining datasets
+Designing Future Trials,ClinicalTrialDesign,The researcher is analyzing the data to design a clinical trial
+Designing Future Trials,ClinicalTrialPatientSelection,The researcher specifically mentions patient selection or clinical trial enrollment/recruitment
+Designing Future Trials,DesigningFutureTrialsTrialProtocol,"Findings used to shape the protocol or conduct of a future trial, such as endpoints, randomization, patient populations, or outcome measures"
+Designing Future Trials,OptimizationOfClinicalTrialParameters,Used also for evaluations/research on clinical trial outcome measures
+Economic or Societial Impact,ConsiderationForReimbursementPractices,Findings relevant to healthcare reimbursement or coverage considerations
+Economic or Societial Impact,QualityOfLifeEconomicOrProductivity,"Outcomes addressing quality of life, economic burden, or lost productivity"
+Funding application/Grants,NihGrant,The researcher specifically mentions an NIH grant
+Funding application/Grants,FundingApplication,"The researcher is submitting this research as part of a grant submission, or to obtain any other non-specific funding"
+Funding application/Grants,FundingApplicationsGrants,"The researcher is submitting this research as part of a grant submission, or to obtain any other non-specific funding"
+Informing patient-care decisions,InformPatientCareDecisions,"Evidence that directly supports clinical or patient-level care decisions, such as treatment choice or disease management"
+Informing patient-care decisions,PatientCareDecisionAid,Evidence-based tools designed to help patients and their providers make specific and deliberated choices among healthcare options
+Informing patient-care decisions,OptimizationOfTreatmentStrategies,"Findings used to refine how an existing treatment is applied, such as dosing, tapering, sequencing, or timing"
+Other,Other,Outcomes that do not fit an existing detailed outcome; the reviewer recorded a proposed new outcome with a short supporting snippet
+Safety or Adverse Events,SafetyProfilesOrSeriousAdverseEvents,"Characterization of a treatment's safety profile or serious adverse events, including associated risks such as mortality or major cardiovascular events"
+Safety or Adverse Events,AdverseEvents,Identification or quantification of adverse events or side effects associated with a treatment
+Supporting Future Research,ProvidesExploratoryStartingPoints,"Conducted an exploratory analysis to identify potential leads, or an exploratory analysis of one or more potential leads that still needs further work at the conclusion"
+Supporting Future Research,TreatmentEffects,"Evaluation of the effect, efficacy, or comparative effectiveness of a treatment on clinical outcomes"
+Supporting Future Research,IdentificationOfRiskFactors,"Identification or research into risk factors for treatment outcomes or disease progression, which can be inversely related (e.g. physical activity decreasing risk or prevalence); includes targeted research into associations between known factors"
+Supporting Future Research,SystematicReviewProtocol,A published protocol for a planned systematic review or individual-participant-data meta-analysis
+Supporting Future Research,OutcomeEpidemiology,"Epidemiological characterization of outcomes in a population, such as incidence, recurrence, or event rates"
+Supporting Future Research,ValidationOfPreclinicalModels,Validation of a preclinical model (for example an animal model) against human data to confirm its representativeness
+Supporting Future Research,IdentificationOfBiologicalPredictors,"Identification or validation of biological factors that may serve as biomarkers, predictors, or indicators of disease progression, recurrence, or treatment progression or efficacy"
+Tools,ClinicalTools,"Development or application of a tool for clinical use, such as risk stratification, subtyping, scoring, or prediction tools that support patient care"
+Tools,WebBasedTools,Web-based applications created for researchers and/or clinicians
+Tools,Tools,"Development of a general-purpose tool, model, or framework for researchers or clinicians not captured by a more specific tool category"
+Tools,StatisticalTools,Statistical tools created for researchers and/or clinicians
+Tools,QualificationOfClinicalOutcomeTools,"Validation or confirmation of pre-existing clinical outcome tools, or of specific factors or parameters used for a tool, scoring, or stratification protocol"
+Tools,StatisticalMethodology,Development or evaluation of statistical methodology or estimation approaches

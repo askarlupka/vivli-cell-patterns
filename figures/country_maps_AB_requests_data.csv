@@ -1,0 +1,47 @@
+"Country","iso3","World Bank classification (FY2027)","LMIC","Requests"
+"United States","USA","High income","No",281
+"United Kingdom","GBR","High income","No",92
+"Canada","CAN","High income","No",77
+"China","CHN","Upper middle income","Yes",74
+"Germany","DEU","High income","No",40
+"Japan","JPN","High income","No",40
+"Netherlands","NLD","High income","No",34
+"Australia","AUS","High income","No",31
+"Italy","ITA","High income","No",25
+"France","FRA","High income","No",24
+"South Korea","KOR","High income","No",22
+"Spain","ESP","High income","No",17
+"Portugal","PRT","High income","No",15
+"Switzerland","CHE","High income","No",15
+"Sweden","SWE","High income","No",11
+"Belgium","BEL","High income","No",8
+"Israel","ISR","High income","No",6
+"Ireland","IRL","High income","No",5
+"Brazil","BRA","Upper middle income","Yes",4
+"Hong Kong SAR China","HKG","High income","No",4
+"Lebanon","LBN","Lower middle income","Yes",4
+"Denmark","DNK","High income","No",3
+"Greece","GRC","High income","No",3
+"New Zealand","NZL","High income","No",3
+"Norway","NOR","High income","No",3
+"South Africa","ZAF","Upper middle income","Yes",3
+"Taiwan","TWN","High income","No",3
+"Czechia","CZE","High income","No",2
+"Finland","FIN","High income","No",2
+"Singapore","SGP","High income","No",2
+"Thailand","THA","Upper middle income","Yes",2
+"United Arab Emirates","ARE","High income","No",2
+"Argentina","ARG","Upper middle income","Yes",1
+"Austria","AUT","High income","No",1
+"Costa Rica","CRI","High income","No",1
+"Croatia","HRV","High income","No",1
+"India","IND","Lower middle income","Yes",1
+"Latvia","LVA","High income","No",1
+"Morocco","MAR","Lower middle income","Yes",1
+"Poland","POL","High income","No",1
+"Saudi Arabia","SAU","High income","No",1
+"Slovakia","SVK","High income","No",1
+"Sri Lanka","LKA","Upper middle income","Yes",1
+"Turkey","TUR","Upper middle income","Yes",1
+"Uruguay","URY","High income","No",1
+"All countries","","","",870
