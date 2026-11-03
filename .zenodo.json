@@ -24,12 +24,5 @@
     { "name": "Conklin, Robert", "affiliation": "Vivli" },
     { "name": "Sim, Ida", "affiliation": "Vivli; University of California San Francisco" }
   ],
-  "related_identifiers": [
-    {
-      "relation": "isSupplementTo",
-      "identifier": "TODO-add-article-DOI-when-available",
-      "resource_type": "publication-article"
-    }
-  ],
-  "notes": "TODO before release: add ORCID iDs to creators, add the article DOI in related_identifiers, and confirm the license SPDX id (use GPL-3.0-only if version 3 exactly is intended)."
+  "notes": "The related article DOI will be added to this record after the article is published."
 }
